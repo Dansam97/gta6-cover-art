@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Frame — Neon Cover Studio</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app" id="appRoot">
+  <aside class="panel" id="controlsPanel">
+    <header class="brand">
+      <div class="brand-badge" aria-hidden="true">VF</div>
+      <div>
+        <h1>Vice Frame</h1>
+        <p class="tagline">Neon Cover Studio — your photos, a Vice City sunset, one bold poster.</p>
+      </div>
+    </header>
+
+    <section class="group" aria-label="Photos">
+      <h2>1 · Photos</h2>
+      <label class="drop" id="dropZone">
+        <span class="drop-title">Drop photos here or click to add</span>
+        <span class="drop-sub">JPG / PNG, read locally — never uploaded</span>
+        <input id="photoInput" type="file" accept="image/*" multiple hidden>
+      </label>
+      <div class="row">
+        <button type="button" class="chip" id="samplePier">Sample: Pier</button>
+        <button type="button" class="chip" id="sampleBlvd">Sample: Boulevard</button>
+        <button type="button" class="chip" id="fillAll">Fill all panels</button>
+      </div>
+      <div class="thumbs" id="thumbStrip" aria-label="Loaded photos"></div>
+      <p class="hint">Click a panel on the poster, then pick a photo for it. Drag on the poster to reposition, scroll to zoom.</p>
+    </section>
+
+    <section class="group" aria-label="Selected panel">
+      <h2>2 · Selected panel <span class="sel-name" id="selectedName">Panel 1</span></h2>
+      <label class="slider">Zoom <input id="zoomRange" type="range" min="100" max="320" value="100"><span id="zoomVal">100%</span></label>
+      <label class="slider">Left ↔ Right <input id="panXRange" type="range" min="-100" max="100" value="0"><span id="panXVal">0</span></label>
+      <label class="slider">Up ↔ Down <input id="panYRange" type="range" min="-100" max="100" value="0"><span id="panYVal">0</span></label>
+      <div class="row">
+        <button type="button" class="chip" id="centerBtn">Center</button>
+        <button type="button" class="chip" id="swapBtn">Swap with next</button>
+        <button type="button" class="chip warn" id="clearBtn">Clear panel</button>
+      </div>
+    </section>
+
+    <section class="group" aria-label="Layout and size">
+      <h2>3 · Layout &amp; post size</h2>
+      <div class="seg" id="layoutSeg" role="group" aria-label="Panel layout">
+        <button type="button" data-layout="classic" class="on">Classic 6</button>
+        <button type="button" data-layout="hero">Hero + Trio</button>
+        <button type="button" data-layout="strips">Neon Strips</button>
+        <button type="button" data-layout="quad">Quad Grid</button>
+      </div>
+      <div class="seg" id="sizeSeg" role="group" aria-label="Export size">
+        <button type="button" data-size="1080x1350">Portrait 1080×1350</button>
+        <button type="button" data-size="1080x1080" class="on">Square 1080×1080</button>
+        <button type="button" data-size="1920x1080">Wide 1920×1080</button>
+      </div>
+    </section>
+
+    <section class="group" aria-label="Caption and grade">
+      <h2>4 · Caption &amp; colour grade</h2>
+      <label class="field">Big title <input id="titleInput" type="text" maxlength="26" value="VICE HEAT"></label>
+      <label class="field">Second line <input id="subtitleInput" type="text" maxlength="34" value="SUNSET CITY STORIES"></label>
+      <label class="field">Badge <input id="badgeInput" type="text" maxlength="18" value="EST. 2026 ★ NEON"></label>
+      <div class="swatches" id="themeSeg" role="group" aria-label="Colour grade">
+        <button type="button" data-theme="sunset" class="sw on" style="--a:#ff5e3a;--b:#ff2e88">Sunset Vice</button>
+        <button type="button" data-theme="neon" class="sw" style="--a:#00e5ff;--b:#b537ff">Neon Night</button>
+        <button type="button" data-theme="miami" class="sw" style="--a:#ffd23f;--b:#00c2a8">Miami Day</button>
+        <button type="button" data-theme="noir" class="sw" style="--a:#ffcf6e;--b:#e63946">Noir Heat</button>
+      </div>
+      <label class="slider">Grade strength <input id="gradeRange" type="range" min="0" max="100" value="72"><span id="gradeVal">72%</span></label>
+      <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain + vignette</label>
+    </section>
+
+    <button id="exportBtn" type="button" class="export">⬇ Export PNG</button>
+    <p id="statusLine" role="status">Add a photo — your cover is already live.</p>
+  </aside>
+
+  <section class="stage" id="stageArea">
+    <canvas id="posterCanvas" width="1080" height="1080" aria-label="Live cover preview. Click a panel to select it, drag to reposition its photo."></canvas>
+    <p class="stage-hint">Live preview · click a panel to select · drag to move its photo · scroll to zoom it</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
